@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+        rel="stylesheet">
+
+    <title>BJP Dashboard Page</title>
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-hexashop.css">
+    <link rel="stylesheet" href="assets/css/owl-carousel.css">
+    <link rel="stylesheet" href="assets/css/lightbox.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+
+</head>
+
+<body>
+
+    <!-- ** Preloader Start ** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- ** Preloader End ** -->
+
+
+    <!-- ** Header Area Start ** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav d-flex justify-content-between align-items-center">
+                        <!-- <a href="index.html">
+                            <div class="logo">
+                                <img src="assets/images/logo.png" alt="">
+                                <h4 style="color:#f26522">Winning Elections</h4>
+                            </div>
+                        </a> -->
+
+                        <div class="table-responsive" style="margin-top: 5px; margin-right: 20px;">
+                            <table class="table table-bordered">
+                                <tr style="border: #ec0fbc;">
+                                    <th class="admk-img" style="background-color:#0fc7ec; text-align: right;">ADMK</th>
+                                    <th class="bjp-img" style="background-color:#fabb0c; text-align: right;">BJP</th>
+                                    <th class="dmk-img" style="background-color:#ed989b; text-align: right;">DMK</th>
+                                    <th class="ntk-img" style="background-color:#05bc51; text-align: right;">NTK</th>
+                                    <th class="pondi-img" style="background-color:#f5f906; text-align: right;">50/50
+                                    </th>
+                                </tr>
+
+                                <tr>
+                                    <td style="text-align: center; font-weight: bold; font-size: x-large;"></td>
+                                    <td style="text-align: center; font-weight: bold; font-size: x-large;">1</td>
+                                    <td style="text-align: center; font-weight: bold; font-size: x-large;">1</td>
+                                    <td style="text-align: center; font-weight: bold; font-size: x-large;"></td>
+                                    <td style="text-align: center; font-weight: bold; font-size: x-large;">40</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ** Header Area End ** -->
+
+    <!-- ** Main Banner Area Start ** -->
+    <div class="main-banner" id="top">
+        <div class="container-fluid">
+            <div class="row" style="margin-top: -60px;">
+                <div class="col-md-12" style="text-align: center;">
+                    <!-- Dropdown Container -->
+                    <div class="dropdown-container">
+                        <select class="dropdown" id="wardDropdown">
+                            <option value="" disabled selected>Choose Survey Type</option>
+                        </select>
+                        <select class="dropdown" id="districtDropdown">
+                            <option value="" disabled selected>Choose Constituency</option>
+                        </select>
+                        <select class="dropdown" id="assemblyDropdown">
+                            <option value="" disabled selected>Choose Assembly</option>
+                        </select>
+                        <select class="dropdown" id="zoneDropdown">
+                            <option value="" disabled selected>Choose Campaign</option>
+                        </select>
+                        <!-- Button to trigger API call -->
+                        <div>
+                            <button class="button" onclick="triggerApiCall()">Open</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 ">
+                    <div class="right" style="border: 3px solid #f26522; border-radius: 10px; 
+                        overflow:hidden; height: 800px; 
+                        background-image: url('assets/images/tamilnadu-1.png'); 
+                        background-repeat:no-repeat;
+                        background-size: cover; background-size: contain; background-position: center;  ">
+                        <div id="iframeContainer"></div>
+                        <div id="imageContainer"></div>
+                        <!-- WATERMARK -->
+                        <div class="watermark">MANNIT-INNOVATIONS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; Mannit-Innovations Pvt ltd -2024 Webpage with Charts</p>
+    </footer>
+
+
+    <!-- jQuery and other scripts -->
+    <!-- Ensure to include the necessary scripts -->
+    <script src="assets/js/jquery-2.1.0.min.js"></script>
+    <script src="assets/js/popper.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/owl-carousel.js"></script>
+    <script src="assets/js/accordions.js"></script>
+    <script src="assets/js/datepicker.js"></script>
+    <script src="assets/js/scrollreveal.min.js"></script>
+    <script src="assets/js/waypoints.min.js"></script>
+    <script src="assets/js/jquery.counterup.min.js"></script>
+    <script src="assets/js/imgfix.min.js"></script>
+    <script src="assets/js/slick.js"></script>
+    <script src="assets/js/lightbox.js"></script>
+    <script src="assets/js/isotope.js"></script>
+    <script src="assets/data/zone.js"></script>
+    <script src="assets/data/ward.js"></script>
+    <script src="assets/data/district.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <script>
+        function triggerApiCall() {
+            // Your triggerApiCall function here
+            document.getElementById('imageContainer').innerHTML = '';
+            document.getElementById('iframeContainer').innerHTML = '';
+
+            var selectedWard = document.getElementById('wardDropdown').value;
+            var selectedDistrict = document.getElementById('districtDropdown').value;
+            var selectedAssembly = document.getElementById('assemblyDropdown').value;
+            var selectedCampaign = document.getElementById('zoneDropdown').value;
+
+            //var apiUrl = https://broadcastmessage.mannit.co/mannit/eSearch?&domain=WARD&subdomain=WARD&filtercount=4&f1_field=ward_S&f1_op=eq&f1_value=${selectedWard}&f2_field=district_S&f2_op=eq&f2_value=${selectedDistrict}&f3_field=constituency_S&f3_op=eq&f3_value=${selectedAssembly}&f4_field=campaign_S&f4_op=eq&f4_value=${selectedCampaign};
+            // var apiUrl = https://chatbotreport.mannit.co/mannit/eSearch?&domain=WARD&subdomain=WARD&filtercount=4&f1_field=ward_S&f1_op=eq&f1_value=${selectedWard}&f2_field=district_S&f2_op=eq&f2_value=${selectedDistrict}&f3_field=constituency_S&f3_op=eq&f3_value=${selectedAssembly}&f4_field=campaign_S&f4_op=eq&f4_value=${selectedCampaign};
+            // if (selectedWard === "IVRS") {
+            //     // If IVRS is selected, all dropdowns (district, assembly, campaign) are required
+            //     apiUrl = https://chatbotreport.mannit.co/mannit/eSearch?&domain=WARD&subdomain=WARD&filtercount=4&f1_field=ward_S&f1_op=eq&f1_value=${selectedWard}&f2_field=district_S&f2_op=eq&f2_value=${selectedDistrict}&f3_field=constituency_S&f3_op=eq&f3_value=${selectedAssembly}&f4_field=campaign_S&f4_op=eq&f4_value=${selectedCampaign};
+            // } else if (selectedWard === "Manual") {
+            //     // If Manual is selected, only district dropdown is required
+            //     apiUrl = https://chatbotreport.mannit.co/mannit/eSearch?&domain=WARD&subdomain=WARD&filtercount=3&f1_field=ward_S&f1_op=eq&f1_value=${selectedWard}&f2_field=district_S&f2_op=eq&f2_value=${selectedDistrict}&f3_field=constituency_S&f3_op=eq&f3_value=${selectedAssembly};
+            // }else(  selectedWard === "Manual" || selectedDistrict === "Tiruvannamalai") {
+            //     apiUrl = https://chatbotreport.mannit.co/mannit/eSearch?&domain=WARD&subdomain=WARD&filtercount=2&f1_field=ward_S&f1_op=eq&f1_value=${selectedWard}&f2_field=district_S&f2_op=eq&f2_value=${selectedDistrict}&f3_field=constituency_S&f3_op=eq&f3_value=${selectedAssembly};
+
+            // }
+
+            if (selectedWard === "IVRS") {
+                // If IVRS is selected, all dropdowns (district, assembly, campaign) are required
+                apiUrl = `https://chatbotreport.mannit.co/mannit/eSearch?&domain=WARD&subdomain=WARD&filtercount=4&f1_field=ward_S&f1_op=eq&f1_value=${selectedWard}&f2_field=district_S&f2_op=eq&f2_value=${selectedDistrict}&f3_field=constituency_S&f3_op=eq&f3_value=${selectedAssembly}&f4_field=campaign_S&f4_op=eq&f4_value=${selectedCampaign}`;
+            } else if (selectedWard === "Manual" && selectedDistrict === "Tiruvannamalai") {
+                // Add another condition using else if
+                selectedAssembly = "Consolidated";
+                assemblyDropdown.value = selectedAssembly;
+                console.log(selectedAssembly)
+                apiUrl = `https://chatbotreport.mannit.co/mannit/eSearch?&domain=WARD&subdomain=WARD&filtercount=2&f1_field=ward_S&f1_op=eq&f1_value=${selectedWard}&f2_field=district_S&f2_op=eq&f2_value=${selectedDistrict}`;
+            } else {
+                // If Manual is selected, only district dropdown is required
+                console.log("in manual")
+
+                apiUrl = `https://chatbotreport.mannit.co/mannit/eSearch?&domain=WARD&subdomain=WARD&filtercount=3&f1_field=ward_S&f1_op=eq&f1_value=${selectedWard}&f2_field=district_S&f2_op=eq&f2_value=${selectedDistrict}&f3_field=constituency_S&f3_op=eq&f3_value=${selectedAssembly}`;
+            }
+
+
+            //var apiUrl = https://chatbotreport.mannit.co/mannit/eSearch?&domain=WARD&subdomain=WARD&filtercount=2&f1_field=ward_S&f1_op=eq&f1_value=${selectedWard}&f2_field=district_S&f2_op=eq&f2_value=${selectedDistrict}`
+            // Log the API URL to the console
+            console.log("API URL:", apiUrl);
+            var iframeElement = document.createElement('iframe');
+            var imageElement = document.createElement('img');
+
+            // Example: Make a GET request using Fetch API
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
+                    return response.json();
+                })
+                .then(data => {
+                    // Log the entire response for debugging purposes
+                    console.log("API Response:", data);
+
+                    // Extract the URL from the "source" array
+                    if (data.source && Array.isArray(data.source) && data.source.length > 0) {
+                        const sourceObject = JSON.parse(data.source[0]);
+                        const imageUrl = sourceObject.url;
+
+                        // Log the extracted URL
+                        console.log("Image URL:", imageUrl);
+
+                        // Check if the URL contains "google.com/spreadsheets" to determine the type
+                        if (imageUrl.includes("google.com/spreadsheets")) {
+                            // Handle iframe
+                            iframeElement = document.getElementById('iframeContainer');
+                            if (iframeElement) {
+                                iframeElement.innerHTML = <iframe src="${imageUrl}" width="100%" height="800px" scrolling="no"></iframe>;
+                                hideFooter(); // Call hideFooter() after setting the iframe content
+
+                            } else {
+                                console.error("Iframe container element not found");
+                            }
+
+                        } else {
+                            // Handle image
+                            imageElement = document.getElementById('imageContainer');
+                            if (imageElement) {
+                                imageElement.innerHTML = `<img src="${imageUrl}" alt="Generated Image">`;
+                            } else {
+                                console.error("Image container element not found");
+                            }
+                        }
+                        // hideFooter();
+
+                    } else {
+                        console.error("Invalid or missing 'source' data in the API response");
+                    }
+                })
+                .catch(error => console.error("API Error:", error));
+        }
+
+        function hideFooter() {
+            // Your hideFooter function here
+            // Get the footer element
+            var footer = document.querySelector('footer');
+            // Check if footer element exists
+            if (footer) {
+                // Hide the footer by setting its display property to 'none'
+                footer.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Your modified JavaScript code here
+            // Get the dropdown elements
+            var zoneDropdown = document.getElementById('zoneDropdown');
+            var wardDropdown = document.getElementById('wardDropdown');
+            var districtDropdown = document.getElementById('districtDropdown');
+            var assemblyDropdown = document.getElementById('assemblyDropdown');
+
+            // Populate the Zone dropdown with options
+            zoneValues.forEach(function (value) {
+                var option = document.createElement('option');
+                option.value = value;
+                option.text = value;
+                zoneDropdown.appendChild(option);
+            });
+
+            // Populate the Ward dropdown with options
+            wardValues.forEach(function (value) {
+                var option = document.createElement('option');
+                option.value = value;
+                option.text = value;
+                wardDropdown.appendChild(option);
+            });
+
+            // Populate the District dropdown with options
+            for (var district in districtValues) {
+                var option = document.createElement('option');
+                option.value = district;
+                option.text = district;
+                districtDropdown.appendChild(option);
+            }
+
+            wardDropdown.addEventListener('change', function () {
+                var selectedWard = wardDropdown.value;
+                
+
+                // Reset all dropdowns to hidden by default
+                districtDropdown.style.display = "none";
+                assemblyDropdown.style.display = "none";
+                zoneDropdown.style.display = "none";
+
+                // Show only necessary dropdowns based on selected ward
+                if (selectedWard === "Manual") {
+                    // Show district and assembly dropdowns
+                    districtDropdown.style.display = "block";
+                    assemblyDropdown.style.display = "block";
+                    console.log("this is the district dropss" + districtDropdown.value);
+                    // Hide Coimbatore and show Tiruvannamalai
+                    districtDropdown.value .querySelector('option[value="Coimbatore"]').disabled  = true;
+                    districtDropdown.value.querySelector('option[value="Tiruvannamalai"]').disabled  = false;
+                    
+                } else if (selectedWard === "IVRS") {
+                    // Show all dropdowns except zone dropdown if IVRS is selected
+                    districtDropdown.style.display = "block";
+                    assemblyDropdown.style.display = "block";
+                    zoneDropdown.style.display = "block";
+
+                    // Hide Tiruvannamalai and show Coimbatore
+                    // districtDropdown.querySelector('option[value="Tiruvannamalai"]').disabled  = true;
+                    // districtDropdown.querySelector('option[value="Coimbatore"]').disabled  = false;
+                }
+                 
+            });
+
+
+            zoneDropdown.addEventListener('change', function () {
+                // Your zoneDropdown change event listener here
+                var selectedZone = zoneDropdown.value;
+
+                // Reset all dropdowns to hidden by default
+                districtDropdown.style.display = "none";
+                assemblyDropdown.style.display = "none";
+                zoneDropdown.style.display = "none";
+
+                // Show only necessary dropdowns based on selected zone
+                if (selectedZone === "Manual") {
+                    // Show ward and district dropdowns
+                    wardDropdown.style.display = "block";
+                    districtDropdown.style.display = "block";
+                } else {
+                    // Show all dropdowns for other cases
+                    districtDropdown.style.display = "block";
+                    assemblyDropdown.style.display = "block";
+                    zoneDropdown.style.display = "block";
+                }
+            });
+
+            districtDropdown.addEventListener('change', function () {
+                // Your districtDropdown change event listener here
+                var selectedWard = wardDropdown.value;
+                var selectedDistrict = districtDropdown.value;
+
+                // Check if both "Manual" and "Tiruvannamalai" are selected
+                if (selectedWard === "Manual" && selectedDistrict === "Tiruvannamalai") {
+                    // Display only ward and district dropdowns
+                    districtDropdown.style.display = "block";
+                    assemblyDropdown.style.display = "block";
+                    // zoneDropdown.style.display = "none";
+                } else {
+                    // Show all dropdowns for other cases
+                    districtDropdown.style.display = "block";
+                    assemblyDropdown.style.display = "block";
+                    // zoneDropdown.style.display = "block";
+                }
+            });
+
+            var initialWardOptions = wardDropdown.innerHTML;
+            var initialDistrictOptions = districtDropdown.innerHTML;
+            var initialAssemblyOptions = assemblyDropdown.innerHTML;
+            var initialZoneOptions = zoneDropdown.innerHTML;
+
+            wardDropdown.addEventListener('change', function () {
+                districtDropdown.innerHTML = initialDistrictOptions;
+                assemblyDropdown.innerHTML = initialAssemblyOptions;
+                zoneDropdown.innerHTML = initialZoneOptions;
+            });
+
+            districtDropdown.addEventListener('change', function () {
+                assemblyDropdown.innerHTML = initialAssemblyOptions;
+                zoneDropdown.innerHTML = initialZoneOptions;
+            });
+
+            assemblyDropdown.addEventListener('change', function () {
+                // Your assemblyDropdown change event listener here
+                zoneDropdown.innerHTML = initialZoneOptions;
+            });
+
+            districtDropdown.addEventListener('change', function () {
+                // Your second districtDropdown change event listener here
+                assemblyDropdown.innerHTML = "<option value='' disabled selected>Choose Assembly</option>";
+                var selectedDistrict = districtDropdown.value;
+                if (districtValues[selectedDistrict]) {
+                    districtValues[selectedDistrict].forEach(function (value) {
+                        var option = document.createElement('option');
+                        option.value = value;
+                        option.text = value;
+                        assemblyDropdown.appendChild(option);
+                    });
+                }
+            });
+
+        });
+    </script>
+</body>
+
+</html>
